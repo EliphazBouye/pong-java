@@ -9,10 +9,11 @@ class Pong extends JPanel {
     private static final int RECT_WIDTH  = 20;
     private static final int RECT_HEIGHT  = 150;
     private static final int RECT_X  = 0;
-    private static final int RECT_Y  = DIMENSION_HEIGHT / 2 - RECT_HEIGHT / 2 ;
+    private static final int RECT_Y  = (DIMENSION_HEIGHT / 2) - (RECT_HEIGHT / 2) ;
     
     private Color colorPlayer1 = Color.RED;
     private Color colorPlayer2 = Color.GREEN;
+    private Color colorMiddleLine = Color.white;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -28,11 +29,16 @@ class Pong extends JPanel {
     }
 
     private void player(Graphics g) {
+	// Draw player 1
 	g.setColor(colorPlayer1);
 	g.fillRect(RECT_X, RECT_Y, RECT_WIDTH, RECT_HEIGHT);
-	
+
+	// Draw player 2
 	g.setColor(colorPlayer2);
 	g.fillRect(DIMENSION_WIDTH - RECT_WIDTH, RECT_Y, RECT_WIDTH, RECT_HEIGHT);
+
+	g.setColor(colorMiddleLine);
+	g.fillRect(DIMENSION_WIDTH / 2, 0, 5, DIMENSION_HEIGHT);
     } 
 
     private static void createAndShowGui() {

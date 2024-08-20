@@ -1,24 +1,46 @@
-class Pong {
-    private static final int BORD_X = 6;
-    private static final int BORD_Y = 6;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Color;
+import javax.swing.*;
 
-    private static void drawBord() {
-	int[][] bord = new int[BORD_Y][BORD_X];
+class Pong extends JPanel {
+    private static final int RECT_X  = 5;
+    private static final int RECT_Y  = 50;
+    private static final int RECT_WIDTH  = 20;
+    private static final int RECT_HEIGHT  = 160;
+    private Color shapeColor = Color.RED;
 
-        char value = 0;
-	for (int y = 0; y < Pong.BORD_Y; y++) {
-            for (int x = 0; x < Pong.BORD_X; x++) {
-                value = ++value;
-                bord[y][x] = value;
+    @Override
+    protected void paintComponent(Graphics g) {
+	super.paintComponent(g);
+	g.setColor(shapeColor);
+	g.drawRect(RECT_X, RECT_Y, RECT_WIDTH, RECT_HEIGHT);
+	g.drawRect(80, RECT_Y, RECT_WIDTH, RECT_HEIGHT);
+    }
 
-		System.out.println(bord[y][x] + " ");
-            }
-	}
+    @Override
+    public Dimension getPreferredSize() {
+	return new Dimension(900, 600);
+    }
 
+    private static void createAndShowGui() {
+	Pong mainPanel = new Pong();
 
+	JFrame frame = new JFrame("Pong");
+	frame.setBackground(Color.black);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.getContentPane().add(mainPanel);
+       	frame.pack();
+       	frame.setLocationByPlatform(true);
+       	frame.setVisible(true);
+	
     }
 
     public static void main(String[] args) {
-	Pong.drawBord();
+	SwingUtilities.invokeLater(new Runnable() {
+		public void run() {
+		    createAndShowGui();
+		}
+	    });
     }
 }
